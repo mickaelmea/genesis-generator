@@ -9,11 +9,13 @@ const __dirname = dirname(__filename);
 const app = express();
 
 app.use(express.json());
-app.use(express.static('dist'));
 
-// ROTA CORRIGIDA - Catch-all route
+// CORREÇÃO: Caminho absoluto para servir arquivos estáticos
+app.use(express.static(join(__dirname, '../dist')));
+
+// Catch-all route - deve ser a ÚLTIMA rota
 app.get(/(.*)/, (req, res) => {
-  res.sendFile('/app/dist/index.html');
+  res.sendFile(join(__dirname, '../dist/index.html'));
 });
 
 const PORT = process.env.PORT || 3000;
