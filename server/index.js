@@ -44,8 +44,10 @@ app.post('/api/wp-posts', async (req, res) => {
 });
 
 app.use(express.static('dist'));
-app.get('*', (req, res) => {
-  res.sendFile(new URL('../dist/index.html', import.meta.url).pathname);
+
+// Catch-all route - deve ser a ÚLTIMA rota
+app.get('/*', (req, res) => {
+  res.sendFile('/app/dist/index.html');
 });
 
 const PORT = process.env.PORT || 3000;
